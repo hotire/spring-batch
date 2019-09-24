@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * https://spring.io/guides/gs/batch-processing/Z
+ * https://jojoldu.tistory.com/339
  */
 @SpringBootApplication
 public class SpringBatchApplication {
