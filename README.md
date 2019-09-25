@@ -12,9 +12,29 @@
 
 배치 작업 단위로 여러 Step 으로 구성된다.
 
+- Next : 순차적으로 Step 의 순서를 제어한다. 
+
+- Flow : 조건별 흐름 제어 (Fail, Success 제어)
+
+- Decide : Step Flow 분기만 담당한다.
+
+### Status
+
+- Batch Status : Job 또는 Step 의 실행 결과 Enum
+
+- ExitStatus : Step 의 실행 후 상태 (Enum 이 아님)
+
 ### Step
 
 Tasklet, Reader & Processor & Writer 묶음이다.
+
+### Scope
+
+Spring Batch 해당 Scope 동안 Bean 으로 생성한다.
+
+- StepScope : Step 실행 시점 생성
+
+- JobScope : Job 실행 시점 생성
 
 
 ### MetaTable
