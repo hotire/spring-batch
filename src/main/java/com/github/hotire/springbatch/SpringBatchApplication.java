@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * https://spring.io/guides/gs/batch-processing/Z
+ * https://spring.io/guides/gs/batch-processing
  * https://jojoldu.tistory.com/339
  */
 @SpringBootApplication
