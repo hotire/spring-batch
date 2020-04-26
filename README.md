@@ -23,6 +23,19 @@
 
 배치 방법 중 스케줄링에 해당되는 걸로, 쿼츠는 Batch의 보안제 역할이지 대체제가 아니다.  
 
+### 관리 도구들 
+
+- Cron 
+
+- Spring MVC + API Call
+
+- Spring Batch Admin (Deprecated)
+
+- Quartz + Admin 
+
+- CI Tools
+
+
 
 ### Job
 
