@@ -33,7 +33,7 @@
 
 - Quartz + Admin 
 
-- CI Tools
+- CI Tools (Jenkins)
 
 
 
@@ -88,3 +88,15 @@ Spring Batch 해당 Scope 동안 Bean 으로 생성한다.
 ### Getting Started  
 
 - https://spring.io/guides/gs/batch-processing/
+
+
+## Test
+
+### 주의할점 
+
+1. Environment 가 변경될 경우 SpringBootContext 가 새로 시작된다. 
+- 테스트 코드에서 @MockBean / @SpyBean 사용할 때
+- 테스트 코드에서 @TestPropertySource로 환경 변수가 변경할 때 
+- @ConditionalOnProperty로 테스트마다 Config가 다를 떄 
+
+
