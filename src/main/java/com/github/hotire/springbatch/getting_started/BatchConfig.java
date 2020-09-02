@@ -1,7 +1,6 @@
 package com.github.hotire.springbatch.getting_started;
 
-import javax.persistence.EntityManagerFactory;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -12,23 +11,20 @@ import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import javax.persistence.EntityManagerFactory;
+
 @Configuration
 @EnableBatchProcessing
+@RequiredArgsConstructor
 public class BatchConfig {
 
-  @Autowired
-  private JobBuilderFactory jobBuilderFactory;
-
-  @Autowired
-  private StepBuilderFactory stepBuilderFactory;
-
-  @Autowired
-  private EntityManagerFactory entityManagerFactory;
+  private final JobBuilderFactory jobBuilderFactory;
+  private final StepBuilderFactory stepBuilderFactory;
+  private final EntityManagerFactory entityManagerFactory;
 
   @Bean
   public FlatFileItemReader<User> reader() {
