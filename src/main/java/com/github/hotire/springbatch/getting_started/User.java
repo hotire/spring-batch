@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch;
+package com.github.hotire.springbatch.getting_started;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

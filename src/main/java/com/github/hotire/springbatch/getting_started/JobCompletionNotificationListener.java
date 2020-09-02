@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch;
+package com.github.hotire.springbatch.getting_started;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;

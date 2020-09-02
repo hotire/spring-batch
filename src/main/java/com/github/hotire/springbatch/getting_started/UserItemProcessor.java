@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch;
+package com.github.hotire.springbatch.getting_started;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;

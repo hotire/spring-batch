@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch;
+package com.github.hotire.springbatch.getting_started;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
