@@ -2,6 +2,7 @@ package com.github.hotire.springbatch.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +16,7 @@ public class BookJobConfig {
     private final EntityManagerFactory entityManagerFactory;
 
     @Bean
+    @StepScope
     public BookReader bookReader() {
         return new BookReader(entityManagerFactory, 100, "SELECT b FROM Book b");
     }
