@@ -20,4 +20,10 @@ public class BookJobConfig {
     public BookReader bookReader() {
         return new BookReader(entityManagerFactory, 100, "SELECT b FROM Book b");
     }
+
+    @Bean
+    @StepScope
+    public BookWriter bookWriter() {
+        return new BookWriter();
+    }
 }
