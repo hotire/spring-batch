@@ -26,4 +26,9 @@ public class BookJobConfig {
     public BookWriter bookWriter() {
         return new BookWriter();
     }
+
+    @Bean
+    public BookProcessor bookProcessor() {
+        return new BookProcessor();
+    }
 }
