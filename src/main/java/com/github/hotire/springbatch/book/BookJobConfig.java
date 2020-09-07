@@ -28,6 +28,7 @@ public class BookJobConfig {
     }
 
     @Bean
+    @StepScope
     public BookProcessor bookProcessor() {
         return new BookProcessor();
     }
