@@ -2,6 +2,7 @@ package com.github.hotire.springbatch.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import javax.persistence.EntityManagerFactory;
 public class BookJobConfig {
 
     private final EntityManagerFactory entityManagerFactory;
+    private final JobBuilderFactory jobBuilderFactory;
 
     @Bean
     @StepScope
