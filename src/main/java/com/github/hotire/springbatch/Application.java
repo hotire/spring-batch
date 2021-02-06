@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * https://jojoldu.tistory.com/339
  */
 @SpringBootApplication
-public class SpringBatchApplication {
+public class Application {
   public static void main(String[] args) {
-    SpringApplication.run(SpringBatchApplication.class, args);
+    SpringApplication.run(Application.class, args);
   }
 }
