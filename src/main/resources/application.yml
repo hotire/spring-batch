@@ -5,3 +5,8 @@ spring:
     show-sql: true
     properties.hibernate.format_sql: true
 
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mapper/*.xml
