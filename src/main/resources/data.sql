@@ -1,0 +1,1 @@
+INSERT INTO Product (name) values ('우산');
