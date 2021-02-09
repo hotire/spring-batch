@@ -1,5 +1,7 @@
 package com.github.hotire.springbatch.mybatis;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,6 @@ public class ProductMapperTest {
         final Product product = productMapper.selectById(1L);
 
         // then
-        System.out.println(product);
+        assertThat(product).isNotNull();
     }
 }
