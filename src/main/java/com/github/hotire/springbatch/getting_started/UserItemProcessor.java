@@ -1,7 +1,8 @@
 package com.github.hotire.springbatch.getting_started;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class UserItemProcessor implements ItemProcessor<User, User> {

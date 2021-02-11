@@ -1,8 +1,8 @@
 package com.github.hotire.springbatch.book;
 
-import org.springframework.batch.item.database.JpaPagingItemReader;
-
 import javax.persistence.EntityManagerFactory;
+
+import org.springframework.batch.item.database.JpaPagingItemReader;
 
 public class BookReader extends JpaPagingItemReader<Book> {
 

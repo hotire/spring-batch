@@ -1,7 +1,8 @@
 package com.github.hotire.springbatch.getting_started;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

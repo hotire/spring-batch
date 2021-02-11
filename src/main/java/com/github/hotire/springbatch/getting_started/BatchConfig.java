@@ -1,6 +1,7 @@
 package com.github.hotire.springbatch.getting_started;
 
-import lombok.RequiredArgsConstructor;
+import javax.persistence.EntityManagerFactory;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import javax.persistence.EntityManagerFactory;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableBatchProcessing
