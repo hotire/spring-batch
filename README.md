@@ -100,3 +100,7 @@ Spring Batch 해당 Scope 동안 Bean 으로 생성한다.
 - @ConditionalOnProperty로 테스트마다 Config가 다를 떄 
 
 
+## Batch-Rest
+
+https://github.com/chrisgleissner/spring-batch-rest
+
