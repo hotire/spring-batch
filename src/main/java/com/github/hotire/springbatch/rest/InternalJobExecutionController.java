@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/jobs/{jobName}/execution")
+@RequestMapping("/v1/jobs/{jobName}/execution")
 @RestController
 public class InternalJobExecutionController {
 
