@@ -31,7 +31,8 @@ public class InternalJobController {
     }
 
     @GetMapping("/{jobName}/execution")
-    public ResponseEntity<JobResource> execute(@PathVariable String jobName, @RequestParam Map<String, String> params) {
+    public ResponseEntity<JobResource> execute(@PathVariable String jobName,
+                                               @RequestParam Map<String, Object> params) {
         log.info("jobName : {}", jobName);
         log.info("params : {}", params);
         return ResponseEntity.ok().build();

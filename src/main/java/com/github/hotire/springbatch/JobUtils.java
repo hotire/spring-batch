@@ -21,7 +21,10 @@ public final class JobUtils {
     }
 
     public static Map<String, JobParameter> convertRawToParamMap(Map<String, Object> properties) {
-        return Optional.ofNullable(properties).orElse(emptyMap()).entrySet().stream()
+        return Optional.ofNullable(properties)
+                       .orElse(emptyMap())
+                       .entrySet()
+                       .stream()
                        .collect(toMap(Map.Entry::getKey, e -> createJobParameter(e.getValue())));
     }
 
