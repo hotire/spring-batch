@@ -19,7 +19,7 @@ public class InternalJobService {
         return this.jobRegistry.getJobNames()
                                .stream()
                                .map(this::getJob)
-                               .collect(Collectors.toSet());
+                               .collect(Collectors.toList());
     }
 
     protected Job getJob(String jobName) {

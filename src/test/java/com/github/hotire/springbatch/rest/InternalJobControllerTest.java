@@ -8,13 +8,17 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(InternalJobExecutionController.class)
-class InternalJobExecutionControllerTest {
+@WebMvcTest(InternalJobController.class)
+class InternalJobControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private InternalJobService internalJobService;
 
     @Test
     void execute() throws Exception {
