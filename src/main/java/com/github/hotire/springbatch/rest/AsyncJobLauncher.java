@@ -4,5 +4,5 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.core.task.AsyncTaskExecutor;
 
 public interface AsyncJobLauncher extends JobLauncher {
-    void setTaskExecutor(AsyncTaskExecutor taskExecutor);
+    void setAsyncTaskExecutor(AsyncTaskExecutor taskExecutor);
 }

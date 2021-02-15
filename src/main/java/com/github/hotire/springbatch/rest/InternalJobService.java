@@ -15,28 +15,19 @@ import org.springframework.batch.core.launch.NoSuchJobException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.hotire.springbatch.JobUtils;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class InternalJobService {
     private final JobRegistry jobRegistry;
     private final JobLocator jobLocator;
     private final JobLauncher jobLauncher;
-
     private final AsyncJobLauncher asyncJobLauncher;
-
-    public InternalJobService(JobRegistry jobRegistry,
-                              JobLocator jobLocator,
-                              JobLauncher jobLauncher,
-                              @Autowired(required = false) AsyncJobLauncher asyncJobLauncher) {
-        this.jobRegistry = jobRegistry;
-        this.jobLocator = jobLocator;
-        this.jobLauncher = jobLauncher;
-        this.asyncJobLauncher = asyncJobLauncher;
-    }
 
     public Collection<Job> jobs() {
         return this.jobRegistry.getJobNames()
