@@ -19,15 +19,20 @@ import org.springframework.stereotype.Service;
 
 import com.github.hotire.springbatch.JobUtils;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class InternalJobService {
     private final JobRegistry jobRegistry;
     private final JobLocator jobLocator;
-    private final JobLauncher jobLauncher;
-    private final AsyncJobLauncher asyncJobLauncher;
+    private final Map<Boolean, JobLauncher> jobLauncherMapByAsync;
+
+    public InternalJobService(JobRegistry jobRegistry,
+                              JobLocator jobLocator,
+                              JobLauncher jobLauncher,
+                              AsyncJobLauncher asyncJobLauncher) {
+        this.jobRegistry = jobRegistry;
+        this.jobLocator = jobLocator;
+        this.jobLauncherMapByAsync = Map.of(true, asyncJobLauncher, false, jobLauncher);
+    }
 
     public Collection<Job> jobs() {
         return this.jobRegistry.getJobNames()
@@ -37,10 +42,14 @@ public class InternalJobService {
     }
 
     public JobExecution execute(final String jobName, final Map<String, Object> params) {
+        return execute(jobName, params, false);
+    }
+
+    public JobExecution execute(final String jobName, final Map<String, Object> params, boolean async) {
         try {
             final Job job = jobLocator.getJob(jobName);
             final JobParameters jobParameters = JobUtils.convertRawToJobParams(params);
-            return jobLauncher.run(job, jobParameters);
+            return jobLauncherMapByAsync.get(async).run(job, jobParameters);
         } catch (NoSuchJobException | JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
             throw new RuntimeException(e);
         }
@@ -53,5 +62,5 @@ public class InternalJobService {
             throw new RuntimeException(e);
         }
     }
-
+    
 }

@@ -27,7 +27,8 @@ class InternalJobControllerTest {
 
         // when then
         mockMvc.perform(get("/v1/jobs/{jobName}/execution", jobName)
-                                .param("startDate", LocalDateTime.now().toString()))
+                                .param("startDate", LocalDateTime.now().toString())
+                                .param("async", Boolean.TRUE.toString()))
                .andExpect(status().isOk());
     }
 }

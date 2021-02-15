@@ -32,9 +32,9 @@ public class InternalJobController {
 
     @GetMapping("/{jobName}/execution")
     public ResponseEntity<JobResource> execute(@PathVariable String jobName,
-                                               @RequestParam Map<String, Object> params) {
-        log.info("jobName : {}", jobName);
-        log.info("params : {}", params);
+                                               @RequestParam Map<String, Object> params,
+                                               @RequestParam(required = false) boolean async) {
+        internalJobService.execute(jobName, params, async);
         return ResponseEntity.ok().build();
     }
 }

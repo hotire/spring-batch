@@ -24,6 +24,7 @@ public class InternalJobConfig {
         executor.setMaxPoolSize(30);
         executor.setAwaitTerminationSeconds(10);
         executor.setAllowCoreThreadTimeOut(true);
+        executor.setThreadNamePrefix("AsyncJob-");
         return executor;
     }
 
