@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class V1JobResource implements JobResource{
+public class V1JobResource implements JobResource {
     @JsonIgnore
     private final Job job;
 
