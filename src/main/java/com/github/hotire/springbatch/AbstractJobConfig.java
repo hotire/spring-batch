@@ -20,10 +20,10 @@ public abstract class AbstractJobConfig {
     @Autowired
     private JobRegistry registry;
 
-    public Job registerJob(JobRegistry jobRegistry, Job job) {
-        jobRegistry.unregister(job.getName());
+    public Job registerJob(Job job) {
+        registry.unregister(job.getName());
         try {
-            jobRegistry.register(new JobFactory() {
+            registry.register(new JobFactory() {
                 @Override
                 public Job createJob() {
                     return job;

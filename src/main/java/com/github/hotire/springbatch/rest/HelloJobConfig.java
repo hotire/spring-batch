@@ -22,11 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloJobConfig extends AbstractJobConfig {
     @Bean
     public Job helloJob() {
-        return registerJob(getRegistry(), getJobBuilderFactory().get("helloJob")
-                                                                .preventRestart()
-                                                                .incrementer(new RunIdIncrementer())
-                                                                .start(helloStep(null))
-                                                                .build());
+        return registerJob(getJobBuilderFactory().get("helloJob")
+                                                 .preventRestart()
+                                                 .incrementer(new RunIdIncrementer())
+                                                 .start(helloStep(null))
+                                                 .build());
     }
 
     @Bean
