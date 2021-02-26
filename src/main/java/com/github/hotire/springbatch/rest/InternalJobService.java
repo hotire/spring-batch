@@ -8,7 +8,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
-import org.springframework.batch.core.configuration.JobLocator;
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.NoSuchJobException;
@@ -22,15 +21,12 @@ import com.github.hotire.springbatch.JobUtils;
 @Service
 public class InternalJobService {
     private final JobRegistry jobRegistry;
-    private final JobLocator jobLocator;
     private final Map<Boolean, JobLauncher> jobLauncherMapByAsync;
 
     public InternalJobService(JobRegistry jobRegistry,
-                              JobLocator jobLocator,
                               JobLauncher jobLauncher,
                               AsyncJobLauncher asyncJobLauncher) {
         this.jobRegistry = jobRegistry;
-        this.jobLocator = jobLocator;
         this.jobLauncherMapByAsync = Map.of(true, asyncJobLauncher, false, jobLauncher);
     }
 
@@ -47,7 +43,7 @@ public class InternalJobService {
 
     public JobExecution execute(final String jobName, final Map<String, Object> params, boolean async) {
         try {
-            final Job job = jobLocator.getJob(jobName);
+            final Job job = jobRegistry.getJob(jobName);
             final JobParameters jobParameters = JobUtils.convertRawToJobParams(params);
             return jobLauncherMapByAsync.get(async).run(job, jobParameters);
         } catch (NoSuchJobException | JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
