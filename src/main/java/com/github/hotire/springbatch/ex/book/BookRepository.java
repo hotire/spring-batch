@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch.book;
+package com.github.hotire.springbatch.ex.book;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

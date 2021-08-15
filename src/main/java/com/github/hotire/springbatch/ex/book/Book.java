@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch.book;
+package com.github.hotire.springbatch.ex.book;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
