@@ -10,6 +10,8 @@ import org.springframework.batch.core.scope.context.SynchronizationManagerSuppor
  */
 public class JobSynchronizationManagerSupport extends SynchronizationManagerSupport<JobExecution, JobContext> {
 
+    private static final JobSynchronizationManagerSupport delegate = new JobSynchronizationManagerSupport();
+
     @Override
     protected void close(JobContext context) {
         context.close();
@@ -18,5 +20,9 @@ public class JobSynchronizationManagerSupport extends SynchronizationManagerSupp
     @Override
     protected JobContext createNewContext(JobExecution execution, BatchPropertyContext propertyContext) {
         return new JobContext(execution);
+    }
+
+    public static SynchronizationManagerSupport<JobExecution, JobContext> getInstance() {
+        return delegate;
     }
 }
