@@ -32,14 +32,17 @@ public class DefaultPagingItemReader<T> extends AbstractPaginatedDataItemReader<
 
     @Override
     protected Iterator<T> doPageRead() {
-        return null;
+        return listProvider.apply(new PagingParam(context, page, pageSize))
+                           .iterator();
     }
 
     @Data
     @RequiredArgsConstructor
     public static class PagingParam {
+
+        private final ExecutionContext context;
         private final int page;
-        private int size;
+        private final int size;
 
         public int getOffset() {
             return page * size;
