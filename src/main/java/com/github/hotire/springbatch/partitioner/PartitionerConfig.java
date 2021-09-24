@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * https://github.com/eugenp/tutorials/blob/master/spring-batch/src/main/java/com/baeldung/batch/partitioner/SpringbatchPartitionConfig.java
+ */
 @Configuration
 @RequiredArgsConstructor
 public class PartitionerConfig {
