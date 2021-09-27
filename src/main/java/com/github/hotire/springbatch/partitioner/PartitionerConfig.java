@@ -60,7 +60,6 @@ public class PartitionerConfig {
         taskExecutor.setMaxPoolSize(5);
         taskExecutor.setCorePoolSize(5);
         taskExecutor.setQueueCapacity(5);
-        taskExecutor.afterPropertiesSet();
         return taskExecutor;
     }
 
