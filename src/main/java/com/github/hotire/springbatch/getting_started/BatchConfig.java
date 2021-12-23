@@ -21,7 +21,6 @@ import org.springframework.core.io.ClassPathResource;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@EnableBatchProcessing
 @RequiredArgsConstructor
 public class BatchConfig {
 

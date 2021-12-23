@@ -104,3 +104,7 @@ Spring Batch 해당 Scope 동안 Bean 으로 생성한다.
 
 https://github.com/chrisgleissner/spring-batch-rest
 
+
+## References
+
+- https://godekdls.github.io/Spring%20Batch/configuringandrunningajob/
