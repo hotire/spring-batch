@@ -108,3 +108,4 @@ https://github.com/chrisgleissner/spring-batch-rest
 ## References
 
 - https://godekdls.github.io/Spring%20Batch/configuringandrunningajob/
+- https://kwonnam.pe.kr/wiki/springframework/batch
