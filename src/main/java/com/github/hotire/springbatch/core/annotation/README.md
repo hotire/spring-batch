@@ -9,7 +9,6 @@
 
 ### Import BatchConfigurationSelector
 
-
 ### SimpleBatchConfiguration
 
 ### ModularBatchConfiguration
