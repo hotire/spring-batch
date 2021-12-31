@@ -23,3 +23,27 @@ fetch size has been set to Integer.MIN_VALUE (rows are read one by one).
 
 ### handleWarnings
 
+- AbstractCursorItemReader
+~~~
+protected void handleWarnings(Statement statement) throws SQLWarningException,
+	SQLException {
+		if (ignoreWarnings) {
+			if (log.isDebugEnabled()) {
+				SQLWarning warningToLog = statement.getWarnings();
+				while (warningToLog != null) {
+					log.debug("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() + "', error code '"
+							+ warningToLog.getErrorCode() + "', message [" + warningToLog.getMessage() + "]");
+					warningToLog = warningToLog.getNextWarning();
+				}
+			}
+		}
+		else {
+			SQLWarning warnings = statement.getWarnings();
+			if (warnings != null) {
+				throw new SQLWarningException("Warning not ignored", warnings);
+			}
+		}
+	}
+~~~
+SQLWarning warningToLog = statement.getWarnings(); 에서 에러가 발생함 
+
