@@ -19,6 +19,16 @@
 fetch size has been set to Integer.MIN_VALUE (rows are read one by one).
 ~~~
  
+### BinaryResultsetReader
+
+### NativeProtocol
+
+init 
+
+~~~java
+  protocolEntityClassToBinaryReader.put(Resultset.class, new BinaryResultsetReader(this));
+~~~
+
  
 
 ### handleWarnings
