@@ -2,6 +2,29 @@
 
 ## MySQL
 
+### AbstractCursorItemReader
+
+~~~java
+protected T doRead() throws Exception {
+		if (rs == null) {
+			throw new ReaderNotOpenException("Reader must be open before it can be read.");
+		}
+
+		try {
+			if (!rs.next()) {
+				return null;
+			}
+			int currentRow = getCurrentItemCount();
+			T item = readCursor(rs, currentRow);
+			verifyCursorPosition(currentRow);
+			return item;
+		}
+		catch (SQLException se) {
+			throw getExceptionTranslator().translate("Attempt to process next row failed", getSql(), se);
+		}
+	}
+~~~
+
 ### FetchSize
 
 - https://cheese10yun.github.io/spring-batch-reader-performance-2/
