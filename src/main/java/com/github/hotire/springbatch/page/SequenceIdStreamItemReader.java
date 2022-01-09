@@ -1,6 +1,7 @@
 package com.github.hotire.springbatch.page;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Function;
 
 import org.springframework.batch.item.NonTransientResourceException;
@@ -16,17 +17,17 @@ import lombok.RequiredArgsConstructor;
  */
 public class SequenceIdStreamItemReader<T extends SequenceIdAware> extends AbstractItemStreamItemReader<T> {
 
-    private final Function<SequenceIdStreamParam, Iterator<T>> resultsProvider;
+    private final Function<SequenceIdStreamParam, List<T>> resultsProvider;
     private final int pageSize;
 
-    private long lastSequenceId;
+    protected long lastSequenceId;
     protected Iterator<T> results;
 
-    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, Iterator<T>> resultsProvider, int pageSize) {
+    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, List<T>> resultsProvider, int pageSize) {
         this(resultsProvider, pageSize, 0L);
     }
 
-    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, Iterator<T>> resultsProvider, int pageSize, long lastSequenceId) {
+    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, List<T>> resultsProvider, int pageSize, long lastSequenceId) {
         this.resultsProvider = resultsProvider;
         this.pageSize = pageSize;
         this.lastSequenceId = lastSequenceId;
@@ -50,7 +51,7 @@ public class SequenceIdStreamItemReader<T extends SequenceIdAware> extends Abstr
     }
 
     protected Iterator<T> doPageRead() {
-        return resultsProvider.apply(new SequenceIdStreamParam(lastSequenceId, pageSize));
+        return resultsProvider.apply(new SequenceIdStreamParam(lastSequenceId, pageSize)).iterator();
     }
 
     @Getter
