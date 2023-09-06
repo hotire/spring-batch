@@ -1,4 +1,4 @@
-package com.github.hotire.springbatch.page;
+package com.github.hotire.springbatch.reader.page;
 
 import java.util.HashMap;
 import java.util.Iterator;
