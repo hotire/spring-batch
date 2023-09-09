@@ -8,9 +8,8 @@ import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 /**
  * @see org.springframework.batch.item.data.AbstractPaginatedDataItemReader
  * @see org.springframework.batch.item.database.AbstractPagingItemReader;
- * @see
  */
-public class JdbcMySqlZeroOffSetItemReader<T> implements AbstractItemStreamItemReader<T> {
+public class JdbcMySqlZeroOffSetItemReader<T> extends AbstractItemStreamItemReader<T> {
 
     @Override
     public T read()
