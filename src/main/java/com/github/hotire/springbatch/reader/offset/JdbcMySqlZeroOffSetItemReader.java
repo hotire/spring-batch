@@ -13,6 +13,8 @@ import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 @RequiredArgsConstructor
 public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends AbstractItemStreamItemReader<T> {
 
+    private final int pageSize;
+    private ID greaterThanId;
     private final IdMapper<T, ID> idMapper;
     @Override
     public T read()
