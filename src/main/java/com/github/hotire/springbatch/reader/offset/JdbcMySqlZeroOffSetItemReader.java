@@ -19,6 +19,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final int pageSize;
     private ID greaterThanId;
     private final IdMapper<T, ID> idMapper;
+    private int readCount;
     @Override
     public T read()
         throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
