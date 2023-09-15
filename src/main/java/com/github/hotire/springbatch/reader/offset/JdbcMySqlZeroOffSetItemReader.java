@@ -27,7 +27,20 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     @Override
     public T read()
         throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-        return null;
+        if (results.isEmpty() || current >= pageSize) {
+            doReadPage();
+            if (current >= pageSize) {
+                current = 0;
+            }
+        }
+
+        int next = current++;
+        if (next < results.size()) {
+            return results.get(next);
+        }
+        else {
+            return null;
+        }
     }
 
     private void doReadPage() {
