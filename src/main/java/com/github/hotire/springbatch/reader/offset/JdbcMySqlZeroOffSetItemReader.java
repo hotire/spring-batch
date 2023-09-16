@@ -8,10 +8,11 @@ import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
+import org.springframework.batch.item.database.AbstractPagingItemReader;
 
 /**
  * @see org.springframework.batch.item.data.AbstractPaginatedDataItemReader
- * @see org.springframework.batch.item.database.AbstractPagingItemReader;
+ * @see AbstractPagingItemReader;
  */
 @RequiredArgsConstructor
 public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends AbstractItemStreamItemReader<T> {
@@ -24,6 +25,10 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private int current = 0;
     private int readCount = 0;
     private List<T> results = new ArrayList<>();
+
+    /**
+     * @see AbstractPagingItemReader#read()
+     */
     @Override
     public T read()
         throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
@@ -43,6 +48,9 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
         }
     }
 
+    /**
+     * @see AbstractPagingItemReader##doReadPage()
+     */
     private void doReadPage() {
     }
 }
