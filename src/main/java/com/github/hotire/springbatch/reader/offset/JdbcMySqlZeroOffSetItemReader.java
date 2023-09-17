@@ -7,10 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
-import org.springframework.batch.item.support.AbstractItemStreamItemReader;
+import org.springframework.batch.item.data.AbstractPaginatedDataItemReader;
 import org.springframework.batch.item.database.AbstractPagingItemReader;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
-import org.springframework.batch.item.data.AbstractPaginatedDataItemReader;
+import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 
 /**
  * @see AbstractPaginatedDataItemReader
@@ -23,6 +23,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final DataSource dataSource;
     private final String sql;
     private final int pageSize;
+    private final String limitedSql = "sql" + " LIMIT " + pageSize;
     private final IdMapper<T, ID> idMapper;
     private ID greaterThanId;
     private int current = 0;
@@ -56,5 +57,6 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
      * @see JdbcPagingItemReader#doReadPage()
      */
     private void doReadPage() {
+
     }
 }
