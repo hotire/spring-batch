@@ -9,10 +9,13 @@ import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 import org.springframework.batch.item.database.AbstractPagingItemReader;
+import org.springframework.batch.item.database.JdbcPagingItemReader;
+import org.springframework.batch.item.data.AbstractPaginatedDataItemReader;
 
 /**
- * @see org.springframework.batch.item.data.AbstractPaginatedDataItemReader
- * @see AbstractPagingItemReader;
+ * @see AbstractPaginatedDataItemReader
+ * @see AbstractPagingItemReader
+ * @see JdbcPagingItemReader
  */
 @RequiredArgsConstructor
 public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends AbstractItemStreamItemReader<T> {
@@ -50,6 +53,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
 
     /**
      * @see AbstractPagingItemReader##doReadPage()
+     * @see JdbcPagingItemReader#doReadPage()
      */
     private void doReadPage() {
     }
