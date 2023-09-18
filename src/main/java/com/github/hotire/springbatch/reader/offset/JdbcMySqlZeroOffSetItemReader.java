@@ -2,7 +2,8 @@ package com.github.hotire.springbatch.reader.offset;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.NonTransientResourceException;
@@ -25,7 +26,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final DataSource dataSource;
     private final String sql;
     private final int pageSize;
-    private final Map<String, Object> parameterValues;
+    private final List<Object> parameterValues;
     private final IdMapper<T, ID> idMapper;
     private final String limitedSql = "sql" + " LIMIT " + pageSize;
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -62,6 +63,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
      * @see JdbcPagingItemReader#doReadPage()
      */
     private void doReadPage() {
-
+        final List<Object> parameterValuesAddedId = Stream.concat(Stream.of(greaterThanId), parameterValues.stream()).collect(
+            Collectors.toList());
     }
 }
