@@ -12,6 +12,7 @@ import org.springframework.batch.item.data.AbstractPaginatedDataItemReader;
 import org.springframework.batch.item.database.AbstractPagingItemReader;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * @see AbstractPaginatedDataItemReader
@@ -25,8 +26,10 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final String sql;
     private final int pageSize;
     private final Map<String, Object> parameterValues;
-    private final String limitedSql = "sql" + " LIMIT " + pageSize;
     private final IdMapper<T, ID> idMapper;
+    private final String limitedSql = "sql" + " LIMIT " + pageSize;
+    private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
     private ID greaterThanId;
     private int current = 0;
     private int readCount = 0;
