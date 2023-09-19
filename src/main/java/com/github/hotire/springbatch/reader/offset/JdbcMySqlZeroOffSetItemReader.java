@@ -1,6 +1,7 @@
 package com.github.hotire.springbatch.reader.offset;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ import org.springframework.batch.item.database.AbstractPagingItemReader;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * @see AbstractPaginatedDataItemReader
@@ -28,6 +30,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final int pageSize;
     private final List<Object> parameterValues;
     private final IdMapper<T, ID> idMapper;
+    private final RowMapper<T> rowMapper;
     private final String limitedSql = "sql" + " LIMIT " + pageSize;
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -62,8 +65,13 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
      * @see AbstractPagingItemReader##doReadPage()
      * @see JdbcPagingItemReader#doReadPage()
      */
+    @SuppressWarnings("unchecked")
     private void doReadPage() {
+        results.clear();
         final List<Object> parameterValuesAddedId = Stream.concat(Stream.of(greaterThanId), parameterValues.stream()).collect(
             Collectors.toList());
+        final List<?> query = jdbcTemplate.query(limitedSql, parameterValuesAddedId.toArray(), rowMapper);
+        final Collection<T> result = (Collection<T>) query;
+        results.addAll(result);
     }
 }
