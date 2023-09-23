@@ -73,5 +73,9 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
         final List<?> query = jdbcTemplate.query(limitedSql, parameterValuesAddedId.toArray(), rowMapper);
         final Collection<T> result = (Collection<T>) query;
         results.addAll(result);
+
+        if (!results.isEmpty()) {
+            this.greaterThanId = idMapper.toId(results.get(result.size() -1));
+        }
     }
 }
