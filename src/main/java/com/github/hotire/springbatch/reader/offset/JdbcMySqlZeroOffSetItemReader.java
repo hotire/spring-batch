@@ -67,6 +67,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
      */
     @SuppressWarnings("unchecked")
     private void doReadPage() {
+        readCount++;
         results.clear();
         final List<Object> parameterValuesAddedId = Stream.concat(Stream.of(greaterThanId), parameterValues.stream()).collect(
             Collectors.toList());
