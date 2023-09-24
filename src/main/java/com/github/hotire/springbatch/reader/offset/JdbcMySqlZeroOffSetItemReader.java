@@ -30,7 +30,7 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final List<Object> parameterValues;
     private final IdMapper<T, ID> idMapper;
     private final RowMapper<T> rowMapper;
-    private final String limitedSql = "sql" + " LIMIT " + pageSize;
+    private final String limitedSql = sql + " LIMIT " + pageSize;
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
     private ID greaterThanId;
@@ -64,7 +64,6 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
      * @see AbstractPagingItemReader##doReadPage()
      * @see JdbcPagingItemReader#doReadPage()
      */
-    @SuppressWarnings("unchecked")
     private void doReadPage() {
         readCount++;
         results.clear();
