@@ -75,7 +75,15 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
         results.addAll(result);
 
         if (!results.isEmpty()) {
-            this.greaterThanId = idMapper.toId(results.get(result.size() -1));
+            final ID lastId = idMapper.toId(results.get(result.size() -1));
+            setGreaterThanId(lastId);
         }
+    }
+
+     void setGreaterThanId(ID greaterThanId) {
+        if (this.greaterThanId.compareTo(greaterThanId) <= 0 ) {
+            throw new IllegalStateException("Cannot update greaterThanId(from " + this.greaterThanId + " to " + greaterThanId + ") , because greaterThanId should be incremented. " );
+        }
+        this.greaterThanId = greaterThanId;
     }
 }
