@@ -3,7 +3,6 @@ package com.github.hotire.springbatch.reader.offset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -69,16 +68,15 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private void doReadPage() {
         readCount++;
         results.clear();
-        final List<Object> parameterValuesAddedId = Stream.concat(Stream.of(greaterThanId), parameterValues.stream()).collect(
-            Collectors.toList());
-        final List<?> query = jdbcTemplate.query(limitedSql, parameterValuesAddedId.toArray(), rowMapper);
-        final Collection<T> result = (Collection<T>) query;
-        results.addAll(result);
+        final Collection<T> result = jdbcTemplate.query(limitedSql, Stream.concat(Stream.of(greaterThanId), parameterValues.stream()).toArray(), rowMapper);
 
-        if (!results.isEmpty()) {
-            final ID lastId = idMapper.toId(results.get(result.size() -1));
-            setGreaterThanId(lastId);
+        if (result.isEmpty()) {
+            return;
         }
+
+        final ID lastId = idMapper.toId(results.get(result.size() -1));
+        setGreaterThanId(lastId);
+        results.addAll(result);
     }
 
      void setGreaterThanId(ID greaterThanId) {
