@@ -10,7 +10,7 @@ import  org.springframework.beans.factory.config.Scope;
 public interface ScopeCore {
 
     /**
-     * @see Scope#get(String, ObjectFactory) 
+     * @see Scope#get(String, ObjectFactory)
      */
     Object get(String name, ObjectFactory<?> objectFactory);
 }
