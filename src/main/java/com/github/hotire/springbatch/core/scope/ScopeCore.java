@@ -6,6 +6,7 @@ import  org.springframework.beans.factory.config.Scope;
 
 /**
  * @see Scope
+ * @see org.springframework.batch.core.scope.BatchScopeSupport
  */
 public interface ScopeCore {
 
