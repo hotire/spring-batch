@@ -20,7 +20,7 @@ public class SequenceIdStreamItemReader<T extends SequenceIdAware> extends Abstr
     private final Function<SequenceIdStreamParam, List<T>> resultsProvider;
     private final int pageSize;
 
-    protected long lastSequenceId;
+    public long lastSequenceId;
     protected Iterator<T> results;
 
     public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, List<T>> resultsProvider, int pageSize) {

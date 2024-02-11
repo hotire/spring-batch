@@ -30,8 +30,12 @@ public class JdbcMySqlZeroOffSetItemReader<T, ID extends Comparable<ID>> extends
     private final List<Object> parameterValues;
     private final IdMapper<T, ID> idMapper;
     private final RowMapper<T> rowMapper;
-    private final String limitedSql = sql + " LIMIT " + pageSize;
-    private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    private final String limitedSql;
+
+//    private final String limitedSql = sql + " LIMIT " + pageSize;
+//    private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+    private final JdbcTemplate jdbcTemplate;
 
     private ID greaterThanId;
     private int current = 0;

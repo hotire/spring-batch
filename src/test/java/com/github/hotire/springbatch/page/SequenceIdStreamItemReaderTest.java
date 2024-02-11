@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.github.hotire.springbatch.reader.page.SequenceIdAware;
 import com.github.hotire.springbatch.reader.page.SequenceIdStreamItemReader;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 class SequenceIdStreamItemReaderTest  {
