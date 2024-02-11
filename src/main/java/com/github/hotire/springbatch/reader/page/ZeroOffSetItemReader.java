@@ -3,35 +3,32 @@ package com.github.hotire.springbatch.reader.page;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
-
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * @see org.springframework.batch.item.data.AbstractPaginatedDataItemReader
  */
-public class SequenceIdStreamItemReader<T extends SequenceIdAware> extends AbstractItemStreamItemReader<T> {
+public class ZeroOffSetItemReader<T, ID> extends AbstractItemStreamItemReader<T> {
 
-    private final Function<SequenceIdStreamParam, List<T>> resultsProvider;
+    private final Function<Param<ID>, List<T>> resultsProvider;
+    private final ZeroOffSetIdMapper<T, ID> idMapper;
     private final int pageSize;
 
-    public long lastSequenceId;
+    public ID lastSequenceId;
     protected Iterator<T> results;
 
-    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, List<T>> resultsProvider, int pageSize) {
-        this(resultsProvider, pageSize, 0L);
-    }
 
-    public SequenceIdStreamItemReader(Function<SequenceIdStreamParam, List<T>> resultsProvider, int pageSize, long lastSequenceId) {
+    public ZeroOffSetItemReader(Function<Param<ID>, List<T>> resultsProvider, ZeroOffSetIdMapper<T, ID> idMapper, int pageSize, ID lastSequenceId) {
         this.resultsProvider = resultsProvider;
         this.pageSize = pageSize;
         this.lastSequenceId = lastSequenceId;
-        setName(SequenceIdStreamItemReader.class.getSimpleName());
+        this.idMapper = idMapper;
+        setName(ZeroOffSetItemReader.class.getSimpleName());
     }
 
     @Override
@@ -46,18 +43,18 @@ public class SequenceIdStreamItemReader<T extends SequenceIdAware> extends Abstr
         }
 
         final T result = results.next();
-        lastSequenceId = result.getSequenceId();
+        lastSequenceId = idMapper.getId(result);
         return result;
     }
 
     protected Iterator<T> doPageRead() {
-        return resultsProvider.apply(new SequenceIdStreamParam(lastSequenceId, pageSize)).iterator();
+        return resultsProvider.apply(new Param(lastSequenceId, pageSize)).iterator();
     }
 
     @Getter
     @RequiredArgsConstructor
-    public static class SequenceIdStreamParam {
-        private final long lastSequenceId;
+    public static class Param<ID> {
+        private final ID lastSequenceId;
         private final int pageSize;
     }
 }
