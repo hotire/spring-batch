@@ -19,14 +19,14 @@ public class ZeroOffSetItemReader<T, ID> extends AbstractItemStreamItemReader<T>
     private final ZeroOffSetIdMapper<T, ID> idMapper;
     private final int pageSize;
 
-    public ID lastSequenceId;
+    public ID lastId;
     protected Iterator<T> results;
 
 
-    public ZeroOffSetItemReader(Function<Param<ID>, List<T>> resultsProvider, ZeroOffSetIdMapper<T, ID> idMapper, int pageSize, ID lastSequenceId) {
+    public ZeroOffSetItemReader(Function<Param<ID>, List<T>> resultsProvider, ZeroOffSetIdMapper<T, ID> idMapper, int pageSize, ID lastId) {
         this.resultsProvider = resultsProvider;
         this.pageSize = pageSize;
-        this.lastSequenceId = lastSequenceId;
+        this.lastId = lastId;
         this.idMapper = idMapper;
         setName(ZeroOffSetItemReader.class.getSimpleName());
     }
@@ -43,12 +43,12 @@ public class ZeroOffSetItemReader<T, ID> extends AbstractItemStreamItemReader<T>
         }
 
         final T result = results.next();
-        lastSequenceId = idMapper.getId(result);
+        lastId = idMapper.getId(result);
         return result;
     }
 
     protected Iterator<T> doPageRead() {
-        return resultsProvider.apply(new Param(lastSequenceId, pageSize)).iterator();
+        return resultsProvider.apply(new Param(lastId, pageSize)).iterator();
     }
 
     @Getter
