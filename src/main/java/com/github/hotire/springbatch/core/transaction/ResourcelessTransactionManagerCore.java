@@ -1,11 +1,20 @@
 package com.github.hotire.springbatch.core.transaction;
 
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
+import org.springframework.transaction.TransactionException;
 
 /**
  * @see ResourcelessTransactionManager
  */
 public class ResourcelessTransactionManagerCore {
+
+    /**
+     * @see ResourcelessTransactionManager#doGetTransaction()
+     */
+    protected Object doGetTransaction() throws TransactionException {
+        Object transaction = new ResourcelessTransaction();
+        return transaction;
+    }
 
     private static class ResourcelessTransaction {
 
